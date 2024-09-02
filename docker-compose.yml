@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080" # Expose the app on port 8080
+    environment:
+      DATABASE_USER: postgres
+      DATABASE_HOST: db
+      DATABASE_NAME: postgres
+      DATABASE_PASSWORD: admin1234
+      DATABASE_PORT: 5432
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app # Mount the current directory to the app container's directory
+    command: npm start # Command to start your app
+
+  db:
+    image: postgres:13 # Use PostgreSQL version 13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin1234
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432" # Expose PostgreSQL on port 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persist database data in a Docker volume
+
+volumes:
+  pgdata:
