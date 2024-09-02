@@ -1,7 +1,9 @@
 Instructions:
 
-- run: docker-compose up --build
-- run: DB scripts
+- run: docker-compose build --no-cache
+- run: docker-compose up
+- run: DB scripts below
+- try to use my postman collections to test api
 
 DB scripts
 
